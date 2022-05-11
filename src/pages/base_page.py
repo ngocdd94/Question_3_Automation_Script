@@ -8,12 +8,12 @@ class BasePage(object):
 
     def __init__(self, **kwargs):
         self.driver = kwargs["driver"]
-        self.webdriverwait = kwargs["webdriverwait"]
+        self.WebDriverWait = kwargs["WebDriverWait"]
         self.platform = platform.system()
 
     def click_on_element(self, element):
-        el = self.check_element_clickable(element)
-        el.click()
+        self.driver.find_element(*self.page_elements[element]).click()
+        # self.WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((self.page_elements[element]))).click()
 
     def select_dropdown_by_visible_text(self, element, value):
         select = Select(self.check_element_clickable(element))
@@ -36,15 +36,14 @@ class BasePage(object):
         return ele.text
 
     def get_attribute(self, element, attribute):
-        attr = self.check_visibility_of_element(element)
-        return attr.get_attribute(attribute)
+        return self.driver.find_element(*self.page_elements[element]).get_attribute(attribute)
 
     def check_element_clickable(self, element, time_out=5):
-        return self.webdriverwait(self.driver, time_out).until(
+        return self.WebDriverWait(self.driver, time_out).until(
             EC.element_to_be_clickable((self.page_elements[element])))
 
     def check_visibility_of_element(self, element, time_out=5):
-        return self.webdriverwait(self.driver, time_out).until(
+        return self.WebDriverWait(self.driver, time_out).until(
             EC.visibility_of_element_located((self.page_elements[element])))
 
     def get_number_of_elements(self, element):
@@ -58,3 +57,13 @@ class BasePage(object):
         for i in range(len(elements)):
             data_list.append(elements[i].text)
         return data_list
+
+    def get_list_element_attribute(self, element, attribute):
+        elements = self.driver.find_elements(*self.page_elements[element])
+        data_list = []
+        for i in range(len(elements)):
+            data_list.append(elements[i].get_attribute(attribute))
+        return data_list
+
+
+

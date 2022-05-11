@@ -45,12 +45,12 @@ def init_driver(request, browser):
     # init driver
     browser_name = driver.name
     request.cls.driver = driver
-    request.cls.webdriver_wait = WebDriverWait
+    request.cls.WebDriverWait = WebDriverWait
 
     # init pages
-    request.cls.home_page = HomePage(driver=driver, webdriverwait=WebDriverWait)
-    request.cls.franchising_page = FranchisingPage(driver=driver, webdriverwait=WebDriverWait)
-    request.cls.promotion_page = PromotionPage(driver=driver, webdriverwait=WebDriverWait)
+    request.cls.home_page = HomePage(driver=driver, WebDriverWait=WebDriverWait)
+    request.cls.franchising_page = FranchisingPage(driver=driver, WebDriverWait=WebDriverWait)
+    request.cls.promotion_page = PromotionPage(driver=driver, WebDriverWait=WebDriverWait)
 
     yield
     driver.quit()
@@ -67,9 +67,9 @@ def browser(request):
     # get option and return to request when run test function
     return request.config.getoption("--browser")
 
-@pytest.fixture(scope="function", autouse=True)
-def go_to_home_page(request):
-    request.cls.driver.get(Helper.get_config("base_url"))
+# @pytest.fixture(scope="function", autouse=True)
+# def go_to_home_page(request):
+#     request.cls.driver.get(Helper.get_config("base_url"))
 
 
 @pytest.hookimpl(tryfirst=True)
