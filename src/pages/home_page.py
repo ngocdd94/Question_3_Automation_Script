@@ -20,8 +20,14 @@ class HomePage(BasePage):
         "custom": (By.CSS_SELECTOR, ".fake-menu-button__item.btn.srp-view-options__customize"),
         "convert": (By.XPATH, "//label[contains(text(),'Convert')]//preceding-sibling::span//child::input"),
         "submit": (By.XPATH, "//button[@type='submit'][@class='btn btn--primary']"),
-        "aa": (By.CSS_SELECTOR, ".s-item__wrapper.clearfix")
+        "aa": (By.CSS_SELECTOR, ".s-item.s-item__pl-on-bottom"),
 
+        #amazone
+        "a search box": (By.ID, "twotabsearchtextbox"),
+        "a submit": (By.ID, "nav-search-submit-button"),
+        "a price": (By.CSS_SELECTOR, ".a-price-whole"),
+        "a links": (By.XPATH, "//span[@class='a-price-whole']/ancestor::div[@class='a-section a-spacing-small a-spacing-top-small']/div/h2/a"),
+        "a name": (By.XPATH, "//span[@class='a-price-whole']/ancestor::div[@class='a-section a-spacing-small a-spacing-top-small']/div/h2/a/span")
 
     }
 
